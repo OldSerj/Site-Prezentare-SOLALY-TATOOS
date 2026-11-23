@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="ro" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolAly Tattoo & Piercing | Salon de Tatuaje Arad</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['"Oswald"', 'sans-serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    },
+                    colors: {
+                        obsidian: '#0B0B0C',
+                        charcoal: '#141416',
+                        steel: '#1F1F23',
+                        crimson: '#DC2626',
+                        crimsonhover: '#B91C1C',
+                        amberaccent: '#D97706',
+                        ash: '#9CA3AF',
+                        bone: '#F3F4F6'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0B0B0C;
+            color: #F3F4F6;
+            overflow-x: hidden;
+        }
+
+        .hero-bg {
+            background: 
+                radial-gradient(circle at 80% 20%, rgba(220, 38, 38, 0.14) 0%, transparent 45%),
+                radial-gradient(circle at 15% 85%, rgba(217, 119, 6, 0.08) 0%, transparent 40%),
+                linear-gradient(180deg, #0B0B0C 0%, #141416 100%);
+        }
+
+        .grunge-grid {
+            background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .card-ink {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .card-ink:hover {
+            transform: translateY(-5px);
+            border-color: #DC2626;
+            box-shadow: 0 20px 35px -10px rgba(220, 38, 38, 0.2);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0B0C;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2E2E34;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #DC2626;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-crimson selection:text-white">
+
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-40 bg-obsidian/95 backdrop-blur-md border-b border-steel">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="#acasa" class="flex items-center space-x-3.5 group">
+                    <div class="w-11 h-11 rounded bg-crimson text-white flex items-center justify-center shadow-lg shadow-crimson/25 group-hover:bg-crimsonhover transition">
+                        <i class="fa-solid fa-pen-nib text-lg -rotate-45"></i>
+                    </div>
+                    <div>
+                        <span class="font-display text-xl sm:text-2xl font-bold uppercase tracking-wider text-white block leading-none">
+                            SOLALY <span class="text-crimson">TATTOO</span>
+                        </span>
+                        <span class="text-[11px] uppercase tracking-[0.22em] text-ash font-semibold block mt-1">
+                            Tattoo & Piercing Shop • Arad
+                        </span>
+                    </div>
+                </a>
+
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="#acasa" class="text-xs font-semibold uppercase tracking-widest text-bone/80 hover:text-crimson transition">Acasă</a>
+                    <a href="#despre" class="text-xs font-semibold uppercase tracking-widest text-bone/80 hover:text-crimson transition">Studio</a>
+                    <a href="#servicii" class="text-xs font-semibold uppercase tracking-widest text-bone/80 hover:text-crimson transition">Stiluri & Servicii</a>
+                    <a href="#recenzii" class="text-xs font-semibold uppercase tracking-widest text-bone/80 hover:text-crimson transition">Recenzii (4.8★)</a>
+                    <a href="#contact" class="text-xs font-semibold uppercase tracking-widest text-bone/80 hover:text-crimson transition">Program & Locație</a>
+                </nav>
+
+                <div class="flex items-center space-x-3">
+                    <button onclick="toggleBookingModal()" class="relative py-2.5 px-4 sm:px-5 rounded bg-steel hover:bg-crimson text-white border border-white/10 transition flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
+                        <i class="fa-solid fa-calendar-plus text-crimson group-hover:text-white"></i>
+                        <span class="hidden sm:inline">Sesiunea Mea</span>
+                        <span id="selection-badge" class="bg-crimson text-white text-[11px] font-bold w-5 h-5 rounded-sm flex items-center justify-center">0</span>
+                    </button>
+
+                    <button id="mobile-menu-btn" class="lg:hidden p-2.5 rounded bg-steel text-white hover:bg-crimson transition focus:outline-none" aria-label="Meniu">
+                        <i class="fa-solid fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden lg:hidden bg-charcoal border-b border-steel px-4 pt-3 pb-6 space-y-2">
+            <a href="#acasa" class="mobile-link block px-4 py-3 rounded text-sm font-bold uppercase tracking-wider text-bone hover:bg-steel hover:text-crimson">Acasă</a>
+            <a href="#despre" class="mobile-link block px-4 py-3 rounded text-sm font-bold uppercase tracking-wider text-bone hover:bg-steel hover:text-crimson">Studio & Facilități</a>
+            <a href="#servicii" class="mobile-link block px-4 py-3 rounded text-sm font-bold uppercase tracking-wider text-bone hover:bg-steel hover:text-crimson">Stiluri & Servicii</a>
+            <a href="#recenzii" class="mobile-link block px-4 py-3 rounded text-sm font-bold uppercase tracking-wider text-bone hover:bg-steel hover:text-crimson">Recenzii Clienți</a>
+            <a href="#contact" class="mobile-link block px-4 py-3 rounded text-sm font-bold uppercase tracking-wider text-bone hover:bg-steel hover:text-crimson">Program & Contact</a>
+        </div>
+    </header>
+
+    <section id="acasa" class="hero-bg grunge-grid pt-28 pb-20 md:pt-36 md:pb-28 relative border-b border-steel">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded bg-charcoal border border-steel text-xs font-bold uppercase tracking-widest text-bone">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span>Calea Aurel Vlaicu 60-68, Arad</span>
+                        <span class="text-crimson">|</span>
+                        <span class="text-amberaccent">4.8 ★ (184 Recenzii)</span>
+                    </div>
+
+                    <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-bold uppercase tracking-tight text-white leading-[1.05]">
+                        ARTĂ PE PIELE. <br>
+                        <span class="text-crimson">PRECIZIE.</span> CARACTER.
+                    </h1>
+
+                    <p class="text-base sm:text-lg text-ash max-w-2xl leading-relaxed">
+                        <strong>Tattoo Arad SolAly Salon De Tatuaje & Piercing Shop</strong> – locul unde ideile tale prind contur definitiv. Lucrări custom, linii curate, atmosferă profesionistă și programări rapide în inima Aradului.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+                        <a href="#contact" class="px-8 py-4 rounded bg-crimson hover:bg-crimsonhover text-white font-display text-base font-bold uppercase tracking-wider shadow-lg shadow-crimson/25 transition flex items-center justify-center gap-3">
+                            <span>Programează o Sesiune</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        <a href="tel:+40758928456" class="px-8 py-4 rounded bg-charcoal hover:bg-steel text-white border border-steel font-display text-base font-bold uppercase tracking-wider transition flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-phone text-crimson"></i>
+                            <span>+40 758 928 456</span>
+                        </a>
+                    </div>
+
+                    <div class="pt-8 border-t border-steel grid grid-cols-3 gap-6 max-w-xl">
+                        <div>
+                            <p class="font-display text-3xl font-bold text-white">4.8 <span class="text-amberaccent text-xl">★</span></p>
+                            <p class="text-xs uppercase tracking-wider text-ash mt-1">184 Recenzii Reale</p>
+                        </div>
+                        <div>
+                            <p class="font-display text-3xl font-bold text-crimson">96<span class="text-lg text-white">/100</span></p>
+                            <p class="text-xs uppercase tracking-wider text-ash mt-1">Scor GhidOnline</p>
+                        </div>
+                        <div>
+                            <p class="font-display text-3xl font-bold text-white">11:00–22:00</p>
+                            <p class="text-xs uppercase tracking-wider text-ash mt-1">Program Extins Zilnic</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5">
+                    <div class="bg-charcoal border border-steel rounded-lg p-6 sm:p-8 shadow-2xl relative">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-crimson via-amberaccent to-crimson"></div>
+                        
+                        <div class="flex items-center justify-between pb-5 border-b border-steel">
+                            <div>
+                                <span class="text-[11px] uppercase tracking-widest text-crimson font-bold">Identitate & Calitate</span>
+                                <h2 class="font-display text-2xl font-bold uppercase text-white mt-0.5">SolAly Ink & Piercing</h2>
+                            </div>
+                            <div class="w-12 h-12 rounded bg-steel flex items-center justify-center text-crimson border border-white/5">
+                                <i class="fa-solid fa-shield-halved text-xl"></i>
+                            </div>
+                        </div>
+
+                        <div class="my-6 rounded bg-obsidian border border-steel p-6 flex flex-col items-center justify-center relative overflow-hidden">
+                            <svg viewBox="0 0 240 160" class="w-full h-44">
+                                <defs>
+                                    <linearGradient id="bladeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#DC2626"/>
+                                        <stop offset="100%" stop-color="#7F1D1D"/>
+                                    </linearGradient>
+                                </defs>
+                                <circle cx="120" cy="80" r="64" fill="none" stroke="#1F1F23" stroke-width="2" stroke-dasharray="6 4"/>
+                                <circle cx="120" cy="80" r="50" fill="none" stroke="#DC2626" stroke-width="1.5" opacity="0.6"/>
+                                <polygon points="120,22 132,68 178,80 132,92 120,138 108,92 62,80 108,68" fill="url(#bladeGrad)" opacity="0.9"/>
+                                <circle cx="120" cy="80" r="14" fill="#0B0B0C" stroke="#F3F4F6" stroke-width="2"/>
+                                <circle cx="120" cy="80" r="4" fill="#D97706"/>
+                                <line x1="40" y1="80" x2="62" y2="80" stroke="#9CA3AF" stroke-width="1.5"/>
+                                <line x1="178" y1="80" x2="200" y2="80" stroke="#9CA3AF" stroke-width="1.5"/>
+                            </svg>
+                            <span class="text-[11px] uppercase tracking-[0.25em] text-ash mt-2 font-semibold">Sterilizare 100% • Ace de Unică Folosință</span>
+                        </div>
+
+                        <div class="space-y-3 text-xs text-bone/90">
+                            <div class="flex items-center justify-between py-2 border-b border-steel/70">
+                                <span class="text-ash"><i class="fa-solid fa-money-bill-wave text-crimson mr-2"></i>Metodă de plată:</span>
+                                <span class="font-bold uppercase tracking-wider text-amberaccent">Doar Numerar (Cash)</span>
+                            </div>
+                            <div class="flex items-center justify-between py-2 border-b border-steel/70">
+                                <span class="text-ash"><i class="fa-solid fa-square-parking text-crimson mr-2"></i>Parcare:</span>
+                                <span class="font-semibold text-white">Gratuită pe stradă & la locație</span>
+                            </div>
+                            <div class="flex items-center justify-between py-2">
+                                <span class="text-ash"><i class="fa-solid fa-bolt text-crimson mr-2"></i>Disponibilitate:</span>
+                                <span class="font-semibold text-emerald-400">Programări rapide & Walk-in</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="despre" class="py-20 bg-charcoal border-b border-steel">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                
+                <div class="lg:col-span-6 space-y-5">
+                    <span class="text-xs font-bold uppercase tracking-[0.25em] text-crimson">Despre Salon</span>
+                    <h2 class="font-display text-3xl sm:text-5xl font-bold uppercase text-white leading-tight">
+                        Profesionalism brut, igienă strictă și <span class="text-crimson">execuție impecabilă</span>
+                    </h2>
+                    <p class="text-ash leading-relaxed text-sm sm:text-base">
+                        Situat pe <strong>Calea Aurel Vlaicu 60-68, Arad</strong>, salonul <strong>Tattoo Arad SolAly (Salon de Tatuaje și Piercing Shop)</strong> este un reper pentru cei care caută tatuaje personalizate, body piercing realizat în condiții sterile și o abordare directă, prietenoasă și profesionistă.
+                    </p>
+                    <p class="text-ash leading-relaxed text-sm sm:text-base">
+                        Fiecare proiect începe cu o discuție clară pentru a înțelege exact viziunea ta, anatomia zonei și detaliile tehnice. De asemenea, pentru cei care doresc să își modifice sau să șteargă un tatuaj vechi, ecosistemul SolAly din Arad include și servicii dedicate de îndepărtare tatuaje cu laser.
+                    </p>
+
+                    <div class="pt-4">
+                        <p class="text-xs font-bold uppercase tracking-widest text-white mb-3">Ce apreciază clienții noștri:</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1.5 rounded bg-obsidian border border-steel text-xs font-medium text-bone">
+                                <i class="fa-solid fa-thumbs-up text-crimson mr-1.5"></i>Recomandare
+                            </span>
+                            <span class="px-3 py-1.5 rounded bg-obsidian border border-steel text-xs font-medium text-bone">
+                                <i class="fa-solid fa-bolt text-amberaccent mr-1.5"></i>Programare rapidă
+                            </span>
+                            <span class="px-3 py-1.5 rounded bg-obsidian border border-steel text-xs font-medium text-bone">
+                                <i class="fa-solid fa-fire text-crimson mr-1.5"></i>Atmosferă excelentă
+                            </span>
+                            <span class="px-3 py-1.5 rounded bg-obsidian border border-steel text-xs font-medium text-bone">
+                                <i class="fa-solid fa-user-check text-emerald-400 mr-1.5"></i>Personal civilizat & înțelegere
+                            </span>
+                            <span class="px-3 py-1.5 rounded bg-obsidian border border-steel text-xs font-medium text-bone">
+                                <i class="fa-solid fa-award text-amberaccent mr-1.5"></i>Lucrări de calitate
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="bg-obsidian p-6 rounded-lg border border-steel space-y-3">
+                        <div class="w-10 h-10 rounded bg-crimson/15 text-crimson flex items-center justify-center">
+                            <i class="fa-solid fa-store text-lg"></i>
+                        </div>
+                        <h3 class="font-display text-lg font-bold uppercase text-white">Servicii la Locație</h3>
+                        <p class="text-xs text-ash leading-relaxed">
+                            Studio complet echipat pe Calea Aurel Vlaicu 60-68, plus disponibilitate pentru sesiuni și evenimente în aer liber.
+                        </p>
+                    </div>
+
+                    <div class="bg-obsidian p-6 rounded-lg border border-steel space-y-3">
+                        <div class="w-10 h-10 rounded bg-amberaccent/15 text-amberaccent flex items-center justify-center">
+                            <i class="fa-solid fa-coins text-lg"></i>
+                        </div>
+                        <h3 class="font-display text-lg font-bold uppercase text-white">Plată Exclusiv Numerar</h3>
+                        <p class="text-xs text-ash leading-relaxed">
+                            Te rugăm să ai în vedere că în salon se acceptă <strong>doar plata în numerar (cash)</strong> pentru toate serviciile de tatuaj și piercing.
+                        </p>
+                    </div>
+
+                    <div class="bg-obsidian p-6 rounded-lg border border-steel space-y-3">
+                        <div class="w-10 h-10 rounded bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
+                            <i class="fa-solid fa-car text-lg"></i>
+                        </div>
+                        <h3 class="font-display text-lg font-bold uppercase text-white">Parcare Gratuită</h3>
+                        <p class="text-xs text-ash leading-relaxed">
+                            Acces facil cu mașina: ai la dispoziție parcare gratuită atât la locație, cât și pe stradă în imediata apropiere.
+                        </p>
+                    </div>
+
+                    <div class="bg-obsidian p-6 rounded-lg border border-steel space-y-3">
+                        <div class="w-10 h-10 rounded bg-sky-500/15 text-sky-400 flex items-center justify-center">
+                            <i class="fa-solid fa-restroom text-lg"></i>
+                        </div>
+                        <h3 class="font-display text-lg font-bold uppercase text-white">Facilități & Acces</h3>
+                        <p class="text-xs text-ash leading-relaxed">
+                            Salonul dispune de toaletă unisex. Notă: intrarea nu este prevăzută cu acces pentru scaune cu rotile.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="servicii" class="py-20 bg-obsidian border-b border-steel">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-2xl mx-auto space-y-3 mb-12">
+                <span class="text-xs font-bold uppercase tracking-[0.25em] text-crimson">Portofoliu & Servicii</span>
+                <h2 class="font-display text-3xl sm:text-5xl font-bold uppercase text-white">
+                    Tatuaje Custom, Piercing & Retuș
+                </h2>
+                <p class="text-sm text-ash">
+                    Filtrează categoriile și adaugă serviciile dorite în lista ta pentru a solicita rapid o estimare de preț și programare.
+                </p>
+            </div>
+
+            <div id="filter-buttons" class="flex flex-wrap justify-center gap-2.5 mb-12">
+                <button data-filter="toate" class="filter-btn active px-5 py-2.5 rounded text-xs font-bold uppercase tracking-wider transition bg-crimson text-white">
+                    Toate Serviciile
+                </button>
+                <button data-filter="tatuaje" class="filter-btn px-5 py-2.5 rounded text-xs font-bold uppercase tracking-wider transition bg-charcoal text-ash hover:text-white border border-steel">
+                    Tatuaje & Stiluri
+                </button>
+                <button data-filter="piercing" class="filter-btn px-5 py-2.5 rounded text-xs font-bold uppercase tracking-wider transition bg-charcoal text-ash hover:text-white border border-steel">
+                    Piercing Shop
+                </button>
+                <button data-filter="speciale" class="filter-btn px-5 py-2.5 rounded text-xs font-bold uppercase tracking-wider transition bg-charcoal text-ash hover:text-white border border-steel">
+                    Cover-Up & Laser
+                </button>
+            </div>
+
+            <div id="services-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            </div>
+
+        </div>
+    </section>
+
+    <section id="recenzii" class="py-20 bg-charcoal border-b border-steel">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                
+                <div class="lg:col-span-5 bg-obsidian p-8 rounded-lg border border-steel space-y-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-widest text-crimson">Evaluare Clienți</span>
+                            <div class="flex items-baseline gap-3 mt-1">
+                                <span class="font-display text-5xl font-bold text-white">4,8</span>
+                                <span class="text-amberaccent text-xl">★★★★★</span>
+                            </div>
+                            <p class="text-xs text-ash mt-1">Bazat pe <strong>184 recenzii</strong> verificate • Scor 96/100</p>
+                        </div>
+                        <div class="w-14 h-14 rounded bg-steel flex items-center justify-center font-display text-2xl font-bold text-crimson border border-white/10">
+                            96
+                        </div>
+                    </div>
+
+                    <div class="space-y-2.5 pt-2">
+                        <div class="flex items-center gap-3 text-xs">
+                            <span class="w-12 text-bone font-semibold">5 stele</span>
+                            <div class="flex-1 h-2 bg-steel rounded-full overflow-hidden">
+                                <div class="bg-amberaccent h-full" style="width: 92.4%"></div>
+                            </div>
+                            <span class="w-8 text-right text-ash">170</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-xs">
+                            <span class="w-12 text-bone font-semibold">4 stele</span>
+                            <div class="flex-1 h-2 bg-steel rounded-full overflow-hidden">
+                                <div class="bg-amberaccent h-full" style="width: 3.3%"></div>
+                            </div>
+                            <span class="w-8 text-right text-ash">6</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-xs">
+                            <span class="w-12 text-bone font-semibold">3 stele</span>
+                            <div class="flex-1 h-2 bg-steel rounded-full overflow-hidden">
+                                <div class="bg-amberaccent h-full" style="width: 0.6%"></div>
+                            </div>
+                            <span class="w-8 text-right text-ash">1</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-xs">
+                            <span class="w-12 text-bone font-semibold">2 stele</span>
+                            <div class="flex-1 h-2 bg-steel rounded-full overflow-hidden">
+                                <div class="bg-amberaccent h-full" style="width: 0.6%"></div>
+                            </div>
+                            <span class="w-8 text-right text-ash">1</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-xs">
+                            <span class="w-12 text-bone font-semibold">1 stea</span>
+                            <div class="flex-1 h-2 bg-steel rounded-full overflow-hidden">
+                                <div class="bg-crimson h-full" style="width: 3.3%"></div>
+                            </div>
+                            <span class="w-8 text-right text-ash">6</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div>
+                            <h3 class="font-display text-2xl sm:text-3xl font-bold uppercase text-white">Experiențele Clienților</h3>
+                            <p class="text-xs text-ash mt-1">Împărtășește experiența ta după vizita la salonul nostru din Arad.</p>
+                        </div>
+                        <button onclick="toggleReviewBox()" class="px-5 py-2.5 rounded bg-crimson hover:bg-crimsonhover text-white text-xs font-bold uppercase tracking-wider transition shrink-0">
+                            + Lasă o recenzie
+                        </button>
+                    </div>
+
+                    <form id="review-form" class="hidden bg-obsidian p-6 rounded-lg border border-crimson/50 space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <input type="text" id="rev-name" required placeholder="Numele tău *" class="w-full px-4 py-2.5 rounded bg-charcoal border border-steel text-sm text-white focus:border-crimson outline-none">
+                            <select id="rev-stars" class="w-full px-4 py-2.5 rounded bg-charcoal border border-steel text-sm text-white focus:border-crimson outline-none">
+                                <option value="5">★★★★★ (5 stele - Excelent)</option>
+                                <option value="4">★★★★☆ (4 stele - Foarte bun)</option>
+                                <option value="3">★★★☆☆ (3 stele - Bun)</option>
+                                <option value="2">★★☆☆☆ (2 stele - Slab)</option>
+                                <option value="1">★☆☆☆☆ (1 stea - Nesatisfăcător)</option>
+                            </select>
+                        </div>
+                        <textarea id="rev-text" rows="3" required placeholder="Scrie impresia ta despre tatuaj, piercing, atmosferă sau artist..." class="w-full px-4 py-2.5 rounded bg-charcoal border border-steel text-sm text-white focus:border-crimson outline-none"></textarea>
+                        <button type="submit" class="px-6 py-2.5 rounded bg-crimson hover:bg-crimsonhover text-white text-xs font-bold uppercase tracking-wider transition">
+                            Publică Recenzia
+                        </button>
+                    </form>
+
+                    <div id="reviews-list" class="space-y-4">
+                        <div class="bg-obsidian p-6 rounded-lg border border-steel text-center space-y-2">
+                            <i class="fa-regular fa-comment-dots text-2xl text-crimson"></i>
+                            <p class="text-sm font-semibold text-white">Poți fi primul care își publică experiența aici</p>
+                            <p class="text-xs text-ash">Clienții noștri ne-au evaluat cu 4,8★ din 184 de voturi pentru programări rapide, atmosferă civilizată și calitatea lucrărilor.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-obsidian">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-2xl mx-auto space-y-3 mb-14">
+                <span class="text-xs font-bold uppercase tracking-[0.25em] text-crimson">Program & Locație</span>
+                <h2 class="font-display text-3xl sm:text-5xl font-bold uppercase text-white">
+                    Intră în Studio sau Programează-te
+                </h2>
+                <p class="text-sm text-ash">
+                    Ne găsești zilnic pe Calea Aurel Vlaicu 60-68, Arad. Sună direct sau trimite detaliile proiectului tău.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
+                
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="bg-charcoal p-7 rounded-lg border border-steel space-y-6">
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-11 h-11 rounded bg-obsidian border border-steel text-crimson flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-location-dot text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-display text-lg font-bold uppercase text-white">Adresă Studio</h3>
+                                <p class="text-sm text-ash mt-0.5">Calea Aurel Vlaicu 60-68, 310000 Arad, Romania</p>
+                                <a href="https://maps.google.com/?q=Calea+Aurel+Vlaicu+60-68+310000+Arad" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-crimson hover:underline mt-2">
+                                    <span>Deschide în Google Maps</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-11 h-11 rounded bg-obsidian border border-steel text-crimson flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-phone text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-display text-lg font-bold uppercase text-white">Telefon & Social</h3>
+                                <a href="tel:+40758928456" class="text-lg font-bold text-white hover:text-crimson transition block mt-0.5">
+                                    +40 758 928 456
+                                </a>
+                                <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs text-ash hover:text-white mt-1.5">
+                                    <i class="fa-brands fa-facebook text-crimson"></i>
+                                    <span>Pagină Oficială Facebook</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-11 h-11 rounded bg-obsidian border border-steel text-crimson flex items-center justify-center shrink-0">
+                                <i class="fa-regular fa-clock text-lg"></i>
+                            </div>
+                            <div class="w-full">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="font-display text-lg font-bold uppercase text-white">Program Salon</h3>
+                                    <span id="open-status-badge" class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                                        Verificare...
+                                    </span>
+                                </div>
+                                <ul class="mt-3 space-y-1.5 text-xs text-ash">
+                                    <li class="flex justify-between border-b border-steel/60 pb-1">
+                                        <span>Luni – Joi:</span>
+                                        <span class="font-bold text-white">11:00 – 22:00</span>
+                                    </li>
+                                    <li class="flex justify-between border-b border-steel/60 pb-1">
+                                        <span>Vineri:</span>
+                                        <span class="font-bold text-amberaccent">11:00 – 22:30</span>
+                                    </li>
+                                    <li class="flex justify-between border-b border-steel/60 pb-1">
+                                        <span>Sâmbătă:</span>
+                                        <span class="font-bold text-white">11:00 – 22:00</span>
+                                    </li>
+                                    <li class="flex justify-between">
+                                        <span>Duminică:</span>
+                                        <span class="font-bold text-white">12:00 – 22:00</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="rounded-lg overflow-hidden border border-steel h-56 bg-charcoal">
+                        <iframe 
+                            title="Harta Tattoo Arad SolAly"
+                            src="https://www.openstreetmap.org/export/embed.html?bbox=21.2980%2C46.1830%2C21.3120%2C46.1910&amp;layer=mapnik&amp;marker=46.1870%2C21.3050" 
+                            class="w-full h-full border-0 grayscale contrast-125 invert"
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7">
+                    <div class="bg-charcoal p-7 sm:p-10 rounded-lg border border-steel">
+                        <h3 class="font-display text-2xl sm:text-3xl font-bold uppercase text-white mb-2">Solicită o Programare</h3>
+                        <p class="text-xs sm:text-sm text-ash mb-6">Descrie ideea tatuajului (zona corpului, dimensiune aproximativă, stil) sau tipul de piercing dorit.</p>
+
+                        <form id="booking-form" class="space-y-5">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label for="nume" class="block text-xs font-bold uppercase tracking-wider text-bone mb-2">Numele tău *</label>
+                                    <input type="text" id="nume" required placeholder="Ex: Andrei Mureșan" class="w-full px-4 py-3 rounded bg-obsidian border border-steel focus:border-crimson outline-none text-sm text-white transition">
+                                </div>
+                                <div>
+                                    <label for="telefon" class="block text-xs font-bold uppercase tracking-wider text-bone mb-2">Telefon *</label>
+                                    <input type="tel" id="telefon" required placeholder="Ex: 0758 000 000" class="w-full px-4 py-3 rounded bg-obsidian border border-steel focus:border-crimson outline-none text-sm text-white transition">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label for="serviciu-select" class="block text-xs font-bold uppercase tracking-wider text-bone mb-2">Tip Serviciu</label>
+                                    <select id="serviciu-select" class="w-full px-4 py-3 rounded bg-obsidian border border-steel focus:border-crimson outline-none text-sm text-white transition">
+                                        <option value="Tatuaj Custom / Nou">Tatuaj Custom / Nou</option>
+                                        <option value="Piercing Shop">Piercing Shop</option>
+                                        <option value="Cover-Up / Acoperire Tatuaj">Cover-Up / Acoperire Tatuaj</option>
+                                        <option value="Consultanță / Estimare Preț">Consultanță / Estimare Preț</option>
+                                        <option value="Îndepărtare Tatuaje Laser (SolAly)">Îndepărtare Tatuaje Laser (SolAly)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="data-dorita" class="block text-xs font-bold uppercase tracking-wider text-bone mb-2">Data preferată</label>
+                                    <input type="date" id="data-dorita" class="w-full px-4 py-3 rounded bg-obsidian border border-steel focus:border-crimson outline-none text-sm text-white transition">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="mesaj" class="block text-xs font-bold uppercase tracking-wider text-bone mb-2">Detalii proiect (Zonă, dimensiune cm, stil) *</label>
+                                <textarea id="mesaj" rows="4" required placeholder="Ex: Doresc un tatuaj Black & Grey pe antebraț, aproximativ 15x10 cm..." class="w-full px-4 py-3 rounded bg-obsidian border border-steel focus:border-crimson outline-none text-sm text-white transition"></textarea>
+                            </div>
+
+                            <div class="bg-obsidian/80 border border-amberaccent/30 rounded p-3.5 text-xs text-amberaccent flex items-center gap-3">
+                                <i class="fa-solid fa-circle-info text-base shrink-0"></i>
+                                <span>Reține: În cadrul salonului SolAly Arad se acceptă <strong>doar plata în numerar (cash)</strong>.</span>
+                            </div>
+
+                            <button type="submit" class="w-full py-4 rounded bg-crimson hover:bg-crimsonhover text-white font-display text-base font-bold uppercase tracking-wider shadow-lg shadow-crimson/20 transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                <span>Trimite Cererea de Programare</span>
+                            </button>
+                        </form>
+
+                        <div id="form-feedback" class="hidden mt-6 p-4 rounded bg-emerald-950/80 border border-emerald-500/40 text-emerald-200 text-sm flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-emerald-400 text-lg mt-0.5"></i>
+                            <div>
+                                <p class="font-bold uppercase tracking-wide">Cerere înregistrată!</p>
+                                <p class="text-xs mt-1 text-emerald-300/90">Artistul nostru te va contacta telefonic în scurt timp pentru confirmarea orei și detaliilor.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-obsidian text-ash pt-14 pb-8 border-t border-steel">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-steel">
+                
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-9 h-9 rounded bg-crimson text-white flex items-center justify-center">
+                            <i class="fa-solid fa-pen-nib text-sm -rotate-45"></i>
+                        </div>
+                        <span class="font-display text-xl font-bold uppercase tracking-wider text-white">SOLALY TATTOO & PIERCING</span>
+                    </div>
+                    <p class="text-xs text-ash leading-relaxed max-w-sm">
+                        Salon de tatuaje și piercing shop în Arad (Calea Aurel Vlaicu 60-68). Lucrări personalizate, igienă la standarde maxime și programări rapide.
+                    </p>
+                </div>
+
+                <div class="space-y-2">
+                    <h4 class="font-display text-sm font-bold uppercase tracking-wider text-white">Navigare Rapidă</h4>
+                    <ul class="space-y-1.5 text-xs">
+                        <li><a href="#acasa" class="hover:text-crimson transition">Acasă</a></li>
+                        <li><a href="#despre" class="hover:text-crimson transition">Despre Salon & Facilități</a></li>
+                        <li><a href="#servicii" class="hover:text-crimson transition">Tatuaje & Piercing</a></li>
+                        <li><a href="#recenzii" class="hover:text-crimson transition">Recenzii Clienți (4.8★)</a></li>
+                        <li><a href="#contact" class="hover:text-crimson transition">Program & Locație</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-2">
+                    <h4 class="font-display text-sm font-bold uppercase tracking-wider text-white">Date de Contact</h4>
+                    <p class="text-xs flex items-center gap-2">
+                        <i class="fa-solid fa-location-dot text-crimson"></i> Calea Aurel Vlaicu 60-68, 310000 Arad
+                    </p>
+                    <p class="text-xs flex items-center gap-2">
+                        <i class="fa-solid fa-phone text-crimson"></i> <a href="tel:+40758928456" class="hover:text-white transition">+40 758 928 456</a>
+                    </p>
+                    <p class="text-xs flex items-center gap-2">
+                        <i class="fa-solid fa-money-bill text-amberaccent"></i> Plată acceptată: Doar numerar
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-ash/70 gap-4">
+                <p>&copy; <span id="current-year"></span> Tattoo Arad SolAly Salon De Tatuaje & Piercing Shop. Toate drepturile rezervate.</p>
+                <p>Arad, România • Scor 96/100</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="booking-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div class="bg-charcoal rounded-lg max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-steel relative max-h-[90vh] flex flex-col">
+            <div class="flex items-center justify-between pb-4 border-b border-steel">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-solid fa-calendar-check text-crimson text-xl"></i>
+                    <h3 class="font-display text-xl font-bold uppercase text-white">Servicii Selectate</h3>
+                </div>
+                <button onclick="toggleBookingModal()" class="w-8 h-8 rounded bg-obsidian hover:bg-crimson text-white flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div id="selected-services-container" class="py-4 overflow-y-auto flex-1 space-y-3">
+            </div>
+
+            <div class="pt-4 border-t border-steel space-y-4">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs uppercase tracking-wider text-ash">Estimare orientativă pornire:</span>
+                    <span id="selection-total" class="font-display text-2xl font-bold text-crimson">0 RON</span>
+                </div>
+                <p class="text-[11px] text-ash">
+                    * Prețul final al tatuajului se stabilește în funcție de dimensiune și complexitate. Plata în salon se face exclusiv numerar.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <button onclick="transferSelectionToForm()" id="transfer-btn" class="flex-1 py-3 px-5 rounded bg-crimson hover:bg-crimsonhover text-white font-display text-sm font-bold uppercase tracking-wider transition">
+                        Trimite spre Programare
+                    </button>
+                    <button onclick="clearSelection()" class="py-3 px-4 rounded bg-obsidian hover:bg-steel text-ash hover:text-white text-xs font-bold uppercase tracking-wider transition border border-steel">
+                        Golește
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-notification" class="fixed bottom-5 right-5 z-50 transform translate-y-24 opacity-0 transition-all duration-300 bg-charcoal text-white px-5 py-3.5 rounded shadow-2xl flex items-center gap-3 text-xs font-bold uppercase tracking-wider border-l-4 border-crimson">
+        <i class="fa-solid fa-check text-crimson text-base"></i>
+        <span id="toast-message">Serviciu adăugat!</span>
+    </div>
+
+    <script>
+        const servicesData = [
+            {
+                id: 1,
+                name: "Tatuaj Realism & Black & Grey",
+                category: "tatuaje",
+                categoryLabel: "Tatuaje & Stiluri",
+                startPrice: 350,
+                unit: "sesiune",
+                description: "Portrete, compoziții detaliate, umbre fine și contrast puternic realizate cu pigmenți premium.",
+                svgType: "realism",
+                popular: true
+            },
+            {
+                id: 2,
+                name: "Fine Line & Minimalist",
+                category: "tatuaje",
+                categoryLabel: "Tatuaje & Stiluri",
+                startPrice: 250,
+                unit: "lucrare",
+                description: "Linii ultra-precise, lettering, simboluri geometrice și design-uri curate cu vindecare rapidă.",
+                svgType: "fineline"
+            },
+            {
+                id: 3,
+                name: "Body Piercing Profesional",
+                category: "piercing",
+                categoryLabel: "Piercing Shop",
+                startPrice: 120,
+                unit: "piercing",
+                description: "Ureche, nas, sprânceană, buză, limbă sau buric – realizat cu ace sterile de unică folosință și bijuterii din titan.",
+                svgType: "piercing",
+                popular: true
+            },
+            {
+                id: 4,
+                name: "Cover-Up (Acoperire Tatuaj Vechi)",
+                category: "speciale",
+                categoryLabel: "Cover-Up & Laser",
+                startPrice: 450,
+                unit: "proiect",
+                description: "Transformarea și acoperirea tatuajelor vechi sau nereușite cu un design nou, adaptat cromatic și anatomic.",
+                svgType: "coverup"
+            },
+            {
+                id: 5,
+                name: "Traditional & Neo-Traditional",
+                category: "tatuaje",
+                categoryLabel: "Tatuaje & Stiluri",
+                startPrice: 300,
+                unit: "sesiune",
+                description: "Contururi îndrăznețe, saturație intensă și teme clasice reinterpretate într-un stil modern și durabil.",
+                svgType: "traditional"
+            },
+            {
+                id: 6,
+                name: "Tatuaje Mari / Full Sleeve",
+                category: "tatuaje",
+                categoryLabel: "Tatuaje & Stiluri",
+                startPrice: 800,
+                unit: "ședință lungă",
+                description: "Proiecte complexe pe braț, spate sau piept, planificate pe sesiuni multiple pentru un rezultat unitar.",
+                svgType: "sleeve"
+            },
+            {
+                id: 7,
+                name: "Schimbare Bijuterie & Îngrijire",
+                category: "piercing",
+                categoryLabel: "Piercing Shop",
+                startPrice: 50,
+                unit: "procedură",
+                description: "Verificare vindecare, înlocuire bijuterie în condiții sterile și recomandări dedicate de aftercare.",
+                svgType: "jewelry"
+            },
+            {
+                id: 8,
+                name: "Îndepărtare Tatuaje cu Laser (SolAly)",
+                category: "speciale",
+                categoryLabel: "Cover-Up & Laser",
+                startPrice: 200,
+                unit: "ședință laser",
+                description: "Estomparea sau eliminarea completă a pigmentului nedorit prin tehnologie laser dedicată în Arad.",
+                svgType: "laser"
+            }
+        ];
+
+        function getServiceVisual(type) {
+            const icons = {
+                realism: `<svg viewBox="0 0 200 120" class="w-full h-40 bg-obsidian p-5"><circle cx="100" cy="60" r="36" fill="none" stroke="#DC2626" stroke-width="2"/><path d="M82 65 Q100 35 118 65 T82 65" fill="#1F1F23" stroke="#F3F4F6" stroke-width="1.5"/><circle cx="100" cy="60" r="8" fill="#DC2626"/></svg>`,
+                fineline: `<svg viewBox="0 0 200 120" class="w-full h-40 bg-obsidian p-5"><line x1="45" y1="90" x2="155" y2="30" stroke="#F3F4F6" stroke-width="1.5"/><circle cx="100" cy="60" r="28" fill="none" stroke="#D97706" stroke-width="1"/><polygon points="100,32 124,74 76,74" fill="none" stroke="#DC2626" stroke-width="1.5"/></svg>`,
+                piercing: `<svg viewBox="0 0 200 120" class="w-full h-40 bg-obsidian p-5"><circle cx="100" cy="62" r="28" fill="none" stroke="#9CA3AF" stroke-width="5"/><circle cx="82" cy="40" r="7" fill="#DC2626"/><circle cx="118" cy="40" r="7" fill="#DC2626"/></svg>`,
+                coverup: `<svg viewBox="0 0 200 120" class="w-full h-40 bg-obsidian p-5"><rect x="65" y="35" width="50" height="50" fill="#1F1F23" stroke="#9CA3AF" stroke-dasharray="4 3"/><rect x="85" y="45" width="50" height="50" fill="#DC2626" opacity="0.85"/></svg>`,
+                traditional: `<svg viewBox="0 0 200 120" class="w-full h-40 bg-obsidian p-5"><path d="M100 25 L112 50 L140 53 L119 72 L125 98 L100 84 L75 98 L81 72 L60 53 L88 50 Z" fill="none" stroke="#D97706" stroke-width="2.5"/><circle cx="100" cy="62" r="10" fill="#DC2626"/></svg>`,
+                sleeve: `<svg viewBox="0 0 200 120" class="w-full h-40 bg-obsidian p-5"><path d="M75 20 L125 20 L118 100 L82 100 Z" fill="#1F1F23" stroke="#DC2626" stroke-width="2"/><path d="M80 45 L120 55 M78 70 L122 80" stroke="#F3F4F6" stroke-width="1.5"/></svg>`,
+                jewelry: `<svg viewBox="0 0 200 120" class="w-full h-40 bg-obsidian p-5"><polygon points="100,28 128,60 100,92 72,60" fill="none" stroke="#F3F4F6" stroke-width="2"/><circle cx="100" cy="60" r="8" fill="#D97706"/></svg>`,
+                laser: `<svg viewBox="0 0 200 120" class="w-full h-40 bg-obsidian p-5"><line x1="100" y1="18" x2="100" y2="85" stroke="#DC2626" stroke-width="3"/><line x1="70" y1="85" x2="130" y2="85" stroke="#F3F4F6" stroke-width="2"/><path d="M85 70 L100 85 L115 70" fill="none" stroke="#D97706" stroke-width="2"/></svg>`
+            };
+            return icons[type] || icons.realism;
+        }
+
+        const servicesGrid = document.getElementById('services-grid');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+
+        function renderServices(filterCategory = 'toate') {
+            servicesGrid.innerHTML = '';
+            const filtered = filterCategory === 'toate'
+                ? servicesData
+                : servicesData.filter(item => item.category === filterCategory);
+
+            filtered.forEach(service => {
+                const card = document.createElement('div');
+                card.className = 'bg-charcoal rounded-lg overflow-hidden border border-steel card-ink flex flex-col justify-between';
+                card.innerHTML = `
+                    <div>
+                        <div class="relative border-b border-steel">
+                            ${getServiceVisual(service.svgType)}
+                            <span class="absolute top-3 left-3 bg-obsidian/90 text-bone text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded border border-steel">
+                                ${service.categoryLabel}
+                            </span>
+                            ${service.popular ? '<span class="absolute top-3 right-3 bg-crimson text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded">Popular</span>' : ''}
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-display text-xl font-bold uppercase text-white tracking-wide">
+                                ${service.name}
+                            </h3>
+                            <p class="text-xs text-ash mt-2 leading-relaxed">
+                                ${service.description}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="px-5 pb-5 pt-3 flex items-center justify-between border-t border-steel/60">
+                        <div>
+                            <span class="text-[10px] uppercase tracking-wider text-ash block">De la</span>
+                            <span class="font-display text-lg font-bold text-white">${service.startPrice} RON</span>
+                            <span class="text-[11px] text-ash"> / ${service.unit}</span>
+                        </div>
+                        <button onclick="addToSelection('${service.name.replace(/'/g, "\\'")}', ${service.startPrice})" class="px-4 py-2 rounded bg-obsidian hover:bg-crimson text-white border border-steel hover:border-crimson text-xs font-bold uppercase tracking-wider transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-plus text-crimson group-hover:text-white"></i>
+                            <span>Selectează</span>
+                        </button>
+                    </div>
+                `;
+                servicesGrid.appendChild(card);
+            });
+        }
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-crimson', 'text-white');
+                    b.classList.add('bg-charcoal', 'text-ash', 'border', 'border-steel');
+                });
+                btn.classList.remove('bg-charcoal', 'text-ash', 'border', 'border-steel');
+                btn.classList.add('bg-crimson', 'text-white');
+                renderServices(btn.getAttribute('data-filter'));
+            });
+        });
+
+        let selectedServices = [];
+
+        function addToSelection(name, price) {
+            const existing = selectedServices.find(item => item.name === name);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                selectedServices.push({ name, price, qty: 1 });
+            }
+            updateSelectionUI();
+            showToast(`Adăugat: ${name}`);
+        }
+
+        function removeSelectionItem(index) {
+            selectedServices.splice(index, 1);
+            updateSelectionUI();
+        }
+
+        function clearSelection() {
+            selectedServices = [];
+            updateSelectionUI();
+        }
+
+        function updateSelectionUI() {
+            const badge = document.getElementById('selection-badge');
+            const container = document.getElementById('selected-services-container');
+            const totalEl = document.getElementById('selection-total');
+            const transferBtn = document.getElementById('transfer-btn');
+
+            const totalCount = selectedServices.reduce((sum, item) => sum + item.qty, 0);
+            const totalEstimate = selectedServices.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            badge.textContent = totalCount;
+            totalEl.textContent = `${totalEstimate} RON`;
+
+            if (selectedServices.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8 text-ash space-y-2">
+                        <i class="fa-solid fa-pen-nib text-2xl text-steel"></i>
+                        <p class="text-sm font-semibold text-white">Nu ai selectat încă niciun serviciu.</p>
+                        <p class="text-xs">Alege un stil de tatuaj sau piercing din lista de servicii.</p>
+                    </div>
+                `;
+                transferBtn.disabled = true;
+                transferBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                transferBtn.disabled = false;
+                transferBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                container.innerHTML = selectedServices.map((item, idx) => `
+                    <div class="flex items-center justify-between bg-obsidian p-3.5 rounded border border-steel">
+                        <div>
+                            <h4 class="text-sm font-bold text-white">${item.name} ${item.qty > 1 ? `(x${item.qty})` : ''}</h4>
+                            <p class="text-xs text-crimson font-semibold">Pornire: ${item.price * item.qty} RON</p>
+                        </div>
+                        <button onclick="removeSelectionItem(${idx})" class="w-8 h-8 rounded bg-charcoal hover:bg-crimson text-ash hover:text-white transition text-xs">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function toggleBookingModal() {
+            const modal = document.getElementById('booking-modal');
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            } else {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        function transferSelectionToForm() {
+            if (selectedServices.length === 0) return;
+            const lines = selectedServices.map(s => `- ${s.qty}x ${s.name} (de la ${s.price * s.qty} RON)`).join('\n');
+            const msgInput = document.getElementById('mesaj');
+            msgInput.value = `Salut! Doresc o programare pentru:\n${lines}\n\nDetalii suplimentare (zonă/dimensiune): `;
+            toggleBookingModal();
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('nume').focus();
+            showToast('Serviciile au fost completate în formular!');
+        }
+
+        function toggleReviewBox() {
+            const form = document.getElementById('review-form');
+            form.classList.toggle('hidden');
+        }
+
+        const reviewForm = document.getElementById('review-form');
+        const reviewsList = document.getElementById('reviews-list');
+
+        reviewForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('rev-name').value.trim();
+            const starsCount = parseInt(document.getElementById('rev-stars').value, 10);
+            const text = document.getElementById('rev-text').value.trim();
+            const starsStr = '★'.repeat(starsCount) + '☆'.repeat(5 - starsCount);
+
+            const reviewItem = document.createElement('div');
+            reviewItem.className = 'bg-obsidian p-5 rounded-lg border border-steel space-y-2';
+            reviewItem.innerHTML = `
+                <div class="flex items-center justify-between">
+                    <span class="font-bold text-sm text-white">${name}</span>
+                    <span class="text-amberaccent text-sm">${starsStr}</span>
+                </div>
+                <p class="text-xs text-ash leading-relaxed">${text}</p>
+                <span class="text-[10px] uppercase tracking-wider text-emerald-400 block">Recenzie trimisă spre verificare</span>
+            `;
+
+            if (reviewsList.querySelector('.text-center')) {
+                reviewsList.innerHTML = '';
+            }
+            reviewsList.prepend(reviewItem);
+            reviewForm.reset();
+            reviewForm.classList.add('hidden');
+            showToast('Recenzia ta a fost înregistrată!');
+        });
+
+        let toastTimeout;
+        function showToast(message) {
+            const toast = document.getElementById('toast-notification');
+            document.getElementById('toast-message').textContent = message;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3000);
+        }
+
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        const bookingForm = document.getElementById('booking-form');
+        const formFeedback = document.getElementById('form-feedback');
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            formFeedback.classList.remove('hidden');
+            bookingForm.reset();
+            showToast('Cererea de programare a fost trimisă!');
+            setTimeout(() => formFeedback.classList.add('hidden'), 8000);
+        });
+
+        function updateOpenStatus() {
+            const badge = document.getElementById('open-status-badge');
+            const now = new Date();
+            const day = now.getDay();
+            const totalMinutes = now.getHours() * 60 + now.getMinutes();
+
+            let isOpen = false;
+            if (day >= 1 && day <= 4) {
+                isOpen = totalMinutes >= 11 * 60 && totalMinutes < 22 * 60;
+            } else if (day === 5) {
+                isOpen = totalMinutes >= 11 * 60 && totalMinutes < (22 * 60 + 30);
+            } else if (day === 6) {
+                isOpen = totalMinutes >= 11 * 60 && totalMinutes < 22 * 60;
+            } else if (day === 0) {
+                isOpen = totalMinutes >= 12 * 60 && totalMinutes < 22 * 60;
+            }
+
+            if (isOpen) {
+                badge.textContent = 'Deschis Acum';
+                badge.className = 'text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30';
+            } else {
+                badge.textContent = 'Închis Acum';
+                badge.className = 'text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded bg-crimson/20 text-crimson border border-crimson/30';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            renderServices('toate');
+            updateSelectionUI();
+            updateOpenStatus();
+        });
+    </script>
+</body>
+</html>
